@@ -67,8 +67,12 @@ export default {
     methods: {
         ClearImage() {
             this.imageUrl = null;
+            this.error = "";
         },
         async generateImage() {
+            
+            this.imageUrl = null;
+            this.error = "";
             const imageSize =
                 this.size === "small"
                     ? "256x256"
@@ -89,11 +93,10 @@ export default {
                     {
                         headers: {
                             "Content-Type": "application/json",
-                            Authorization: `Bearer ${process.env.VUE_APP_OPENAI_API_KEY}`, // Replace with your OpenAI API key
+                            Authorization: `Bearer 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`,// Replace with your OpenAI API key
                         },
                     }
                 );
-                this.error = "";
                 this.imageUrl = response.data;
             } catch (error) {
                 this.error = error;
