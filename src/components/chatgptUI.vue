@@ -36,7 +36,8 @@
             </form>
         </section>
         <section>
-            <div class="flex" v-if="imageUrl">
+            <loading-page v-show="spinner" :spaceT="10" :spaceB="10" />
+            <div v-show="!spinner" class="flex" v-if="imageUrl">
                 <img
                     v-for="(image, index) in imageUrl.data"
                     :key="index"
@@ -46,18 +47,21 @@
             </div>
         </section>
     </main>
-
-    <div class="spinner"></div>
 </template>
 <script>
 import axios from "axios";
 
+import LoadingPage from "../components/LoadingPage.vue";
 export default {
     name: "chatgptUI",
+    components: {
+        LoadingPage,
+    },
     data() {
         return {
             error: "",
             prompt: "",
+            spinner: false,
             // prompt: "Annaba city at night",
             size: "small",
             howmany: 2,
@@ -70,9 +74,9 @@ export default {
             this.error = "";
         },
         async generateImage() {
-            
             this.imageUrl = null;
             this.error = "";
+            this.spinner = true;
             const imageSize =
                 this.size === "small"
                     ? "256x256"
@@ -93,11 +97,13 @@ export default {
                     {
                         headers: {
                             "Content-Type": "application/json",
-                            Authorization: `Bearer ${process.env.VUE_APP_OPENAI_API_KEY}`// Replace with your OpenAI API key
+                            Authorization: `Bearer ${process.env.VUE_APP_OPENAI_API_KEY}`, // Replace with your OpenAI API key
                         },
                     }
                 );
                 this.imageUrl = response.data;
+
+                this.spinner = false;
             } catch (error) {
                 this.error = error;
                 console.error(error);
@@ -151,6 +157,6 @@ export default {
     flex-flow: wrap;
     width: 100%;
     padding: 60px;
-    background-color:var(--primary-color);
+    background-color: var(--primary-color);
 }
 </style>
