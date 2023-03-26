@@ -1,10 +1,12 @@
 <template>
     <header-page />
     <chatgptUI />
+    <footer-page/>
 </template>
 
 <script>
 import chatgptUI from "./components/chatgptUI.vue";
+import FooterPage from './components/FooterPage.vue';
 import HeaderPage from "./components/HeaderPage.vue";
 
 export default {
@@ -12,6 +14,7 @@ export default {
     components: {
         chatgptUI,
         HeaderPage,
+        FooterPage,
     },
 };
 </script>
