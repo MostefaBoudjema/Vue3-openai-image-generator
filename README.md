@@ -31,3 +31,5 @@ npm start
 Visit `http://localhost:8080` in your browser.
 
 The endpoint is at `POST http://localhost:8080/openai/generateimage`.
+
+<a href="https://vue3-openai-image-generator.vercel.app/">Live demo Here</a> 

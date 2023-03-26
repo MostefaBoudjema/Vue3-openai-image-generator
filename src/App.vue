@@ -42,7 +42,7 @@ h3 {
 }
 
 :root {
-    --primary-color: #34a853;
+    --primary-color: #0ca380;
 }
 
 body {
@@ -53,39 +53,11 @@ body {
     background: #f4f4f4;
 }
 
-/* Navbar */
-.navbar {
-    background: #333;
-    color: #fff;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-}
-
-.navbar ul li {
-    margin-left: 1rem;
-}
-
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.navbar a:hover {
-    color: var(--primary-color);
-}
 
 /* Showcase */
 .showcase {
-    height: 450px;
-    width: 100%;
+    /* height: 350px; */
+    /* width: 100%; */
     background: var(--primary-color);
 }
 

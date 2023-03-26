@@ -1,6 +1,6 @@
 <template>
     <div class="error" v-if="error">{{ error }}</div>
-    <main class="">
+    <main class="main">
         <section class="showcase">
             <form @submit.prevent id="image-form" class="form-class">
                 <h1>Describe An Image</h1>
@@ -108,6 +108,10 @@ export default {
 </script>
 
 <style scoped>
+.main {
+    padding-bottom: 50px;
+    background: var(--primary-color);
+}
 .showcase h1 {
     color: #fff;
 }
@@ -146,6 +150,7 @@ export default {
     align-items: center;
     flex-flow: wrap;
     width: 100%;
-    background-color: #34a853;
+    padding: 60px;
+    background-color:var(--primary-color);
 }
 </style>
