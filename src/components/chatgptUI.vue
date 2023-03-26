@@ -93,7 +93,7 @@ export default {
                     {
                         headers: {
                             "Content-Type": "application/json",
-                            Authorization: `Bearer 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`,// Replace with your OpenAI API key
+                            Authorization: `Bearer ${process.env.VUE_APP_OPENAI_API_KEY}`// Replace with your OpenAI API key
                         },
                     }
                 );
