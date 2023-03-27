@@ -11,6 +11,7 @@
                         v-model="prompt"
                         placeholder="Enter Text"
                     />
+                    <!-- <button @click='prompt=""'>x</button> -->
                 </div>
                 <!-- size -->
                 <div class="form-control">
@@ -25,8 +26,8 @@
                     <select name="howmany" id="howmany" v-model="howmany">
                         <option value="1">1</option>
                         <option value="2">2</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
                     </select>
                 </div>
                 <div class="flex-container">
@@ -36,6 +37,11 @@
             </form>
         </section>
         <section>
+            <slider-page
+                width="40"
+                v-if="false"
+                :items="Object.values(imageUrl)"
+            />
             <loading-page v-show="spinner" :spaceT="10" :spaceB="10" />
             <div v-show="!spinner" class="flex" v-if="imageUrl">
                 <img
@@ -52,10 +58,12 @@
 import axios from "axios";
 
 import LoadingPage from "../components/LoadingPage.vue";
+import SliderPage from "./SliderPage.vue";
 export default {
     name: "chatgptUI",
     components: {
         LoadingPage,
+        SliderPage,
     },
     data() {
         return {
@@ -64,14 +72,19 @@ export default {
             spinner: false,
             // prompt: "Annaba city at night",
             size: "small",
-            howmany: 2,
+            howmany: 1,
             imageUrl: null,
         };
     },
     methods: {
+        obj2array(obj) {
+            // return obj.values();
+            return Object.values(obj);
+        },
         ClearImage() {
             this.imageUrl = null;
             this.error = "";
+            this.spinner = false;
         },
         async generateImage() {
             this.imageUrl = null;
@@ -92,7 +105,6 @@ export default {
                         size: imageSize,
                         n: parseInt(this.howmany),
                         response_format: "url",
-                        // method:"POST"
                     },
                     {
                         headers: {
@@ -105,8 +117,11 @@ export default {
 
                 this.spinner = false;
             } catch (error) {
-                this.error = error;
-                console.error(error);
+                console.error(error.response.status);
+                this.spinner = false;
+                if (error.response.status == "400") {
+                    this.error = error.response.data.error.message;
+                }
             }
         },
     },
@@ -117,6 +132,12 @@ export default {
 .main {
     padding-bottom: 50px;
     background: var(--primary-color);
+}
+.form-control {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
 }
 .showcase h1 {
     color: #fff;
