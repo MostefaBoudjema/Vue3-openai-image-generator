@@ -26,8 +26,9 @@
                     <select name="howmany" id="howmany" v-model="howmany">
                         <option value="1">1</option>
                         <option value="2">2</option>
+                        <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="8">8</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="flex-container">
@@ -119,9 +120,9 @@ export default {
             } catch (error) {
                 console.error(error.response.status);
                 this.spinner = false;
-                if (error.response.status == "400") {
+                // if (error.response.status == "400") {
+                //     }
                     this.error = error.response.data.error.message;
-                }
             }
         },
     },
